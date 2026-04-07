@@ -10,12 +10,12 @@ function App() {
   const [currentCollection, setCurrentCollection] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:5000/collections")
+    axios.get("https://shopify-ai-app-uxzl.onrender.com/collections")
       .then(res => setCollections(res.data.custom_collections));
   }, []);
 
   const loadProducts = async (id, name) => {
-    const res = await axios.get(`http://localhost:5000/collection-products/${id}`);
+    const res = await axios.get(`https://shopify-ai-app-uxzl.onrender.com/collection-products/${id}`);
     setProducts(res.data.products);
 
     setSelected([]);
@@ -43,7 +43,7 @@ function App() {
   };
 
   const generate = async () => {
-    const res = await axios.post("http://localhost:5000/generate", {
+    const res = await axios.post("https://shopify-ai-app-uxzl.onrender.com/generate", {
       product: selected[0]
     });
     setGenerated(res.data);
@@ -51,7 +51,7 @@ function App() {
 
   const apply = async () => {
     for (let p of selected) {
-      await axios.post("http://localhost:5000/update", {
+      await axios.post("https://shopify-ai-app-uxzl.onrender.com/update", {
         id: p.id,
         title: generated.title,
         description: generated.description
